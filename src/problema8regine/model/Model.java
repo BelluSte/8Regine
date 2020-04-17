@@ -5,52 +5,40 @@ import java.util.List;
 
 public class Model {
 
-	private Scacchiera scacchiera;
-	private List<Scacchiera> soluzioni;
-	private Regina regina;
+	private List<Scacchiera> soluzioni = null;
 	
 	
-	public Model() {
+	public List<Scacchiera> Risolvi() {
 		
-		scacchiera = new Scacchiera();
+		Scacchiera scacchiera = new Scacchiera();
 		soluzioni = new ArrayList<Scacchiera>();
+		int riga = 0;
 		
-		posizionaRegine(scacchiera, 0);
+		posizionaRegine(scacchiera, riga);
 		
+		return soluzioni;
 	}
 	
 	
 	public void posizionaRegine(Scacchiera scacchiera, int riga) {
 		
-		if (scacchiera.getScacchiera().size() == 8) {
-			System.out.println(scacchiera);
+		if (scacchiera.pezziInseriti() == 8) {
+			soluzioni.add(new Scacchiera(scacchiera));
 			return;
 		}
 		
-		regina = new Regina(riga, 0);
-		
 		for (int c=0; c<8; c++) {
-			for (Regina r: scacchiera.getScacchiera()) {
-				if (c != r.getColonna() && c != r.getColonna()-1 && c != r.getColonna()+1) {
-					
-					regina.setColonna(c);
+			
+			Regina regina = new Regina(riga, c);
+			
+			if (scacchiera.reginaValida(regina)) {
 					
 					scacchiera.aggiungiPezzo(new Regina(regina));
-					System.out.println(scacchiera);
 					
 					posizionaRegine(scacchiera, riga+1);
 					
 					scacchiera.rimuoviPezzo(regina);
-					
-				} else {
-					break;
-				}
 			}
 		}
-	}
-	
-	
-	public List<Scacchiera> getSoluzioni() {
-		return soluzioni;
 	}
 }

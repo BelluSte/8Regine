@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Scacchiera {
 
-	private List<Regina> scacchiera;
+	private List<Regina> scacchiera = null;
 	
 	
 	/**
@@ -21,8 +21,7 @@ public class Scacchiera {
 	 * genera una scacchiera copia
 	 */
 	public Scacchiera(Scacchiera scacchiera) {
-		this.scacchiera = new ArrayList<Regina>();
-		this.scacchiera.addAll(scacchiera.getScacchiera());
+		this.scacchiera = new ArrayList<Regina>(scacchiera.getScacchiera());
 	}
 
 
@@ -41,9 +40,23 @@ public class Scacchiera {
 	}
 
 
+	public int pezziInseriti() {
+		return scacchiera.size();
+	}
+	
+	
+	public boolean reginaValida(Regina regina) {
+		for (Regina r : scacchiera) {
+			if (regina.getColonna() == r.getColonna() || regina.getColonna() == r.getColonna()-1 || regina.getColonna() == r.getColonna()+1) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Override
 	public String toString() {
-		return "Scacchiera [" + scacchiera + "]\n";
+		return scacchiera + "\n";
 	}
 	
 }
