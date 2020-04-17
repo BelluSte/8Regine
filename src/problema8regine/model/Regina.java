@@ -2,10 +2,8 @@ package problema8regine.model;
 
 public class Regina {
 
-	private String name;
 	private int riga;
 	private int colonna;
-	private static int num = 1;
 	
 	
 	/**
@@ -14,10 +12,8 @@ public class Regina {
 	 */
 	public Regina(int riga, int colonna) {
 		super();
-		this.name = "R" + num;
 		this.riga = riga;
 		this.colonna = colonna;
-		num++;
 	}
 
 	
@@ -27,14 +23,8 @@ public class Regina {
 	 */
 	public Regina(Regina regina) {
 		super();
-		this.name = regina.getName();
 		this.riga = regina.getRiga();
 		this.colonna = regina.getColonna();
-	}
-	
-
-	public String getName() {
-		return name;
 	}
 
 
@@ -62,7 +52,8 @@ public class Regina {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + colonna;
+		result = prime * result + riga;
 		return result;
 	}
 
@@ -76,10 +67,9 @@ public class Regina {
 		if (getClass() != obj.getClass())
 			return false;
 		Regina other = (Regina) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		if (colonna != other.colonna)
+			return false;
+		if (riga != other.riga)
 			return false;
 		return true;
 	}
@@ -87,7 +77,7 @@ public class Regina {
 
 	@Override
 	public String toString() {
-		return name + "(" + riga + "," + colonna + ") ";
+		return "(" + riga + "," + colonna + ") ";
 	}
 	
 	

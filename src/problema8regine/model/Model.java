@@ -7,6 +7,7 @@ public class Model {
 
 	private Scacchiera scacchiera;
 	private List<Scacchiera> soluzioni;
+	private List<Integer> colonneValide;
 	
 	
 	public Model() {
@@ -14,40 +15,42 @@ public class Model {
 		scacchiera = new Scacchiera();
 		soluzioni = new ArrayList<Scacchiera>();
 		
-		for (int i=0; i<8; i++) {
-			posizionaRegine(scacchiera, i);
-		}
+		posizionaRegine(scacchiera, 0);
+		
 	}
 	
 	
 	public void posizionaRegine(Scacchiera scacchiera, int riga) {
 		
-		if (scacchiera.getPezziPosizionati().size() == 8) {
+		if (scacchiera.getScacchiera().size() == 8) {
 			soluzioni.add(new Scacchiera(scacchiera));
 			return;
 		}
 		
-		Regina regina = new Regina(riga, 0);
+		
 		boolean trovata = false;
 		
 		for (int c=0; c<8; c++) {
-			for (Regina reg: scacchiera.getPezziPosizionati()) {
-				if (c != reg.getColonna() && c != reg.getColonna()-1 && c != reg.getColonna()+1) {
-					trovata = true;
-					regina.setColonna(c);
+			for (Regina r: scacchiera.getScacchiera()) {
+				if (c == r.getColonna() && c == r.getColonna()-1 && c == r.getColonna()+1) {
 					break;
+				} else {
+					trovata = true;
 				}
 			}
 			if (trovata) {
-				break;
+				Regina regina = new Regina(riga, c);
+				
 			}
 		}
-			
-		scacchiera.aggiungiPezzo(new Regina(regina));
+		
+		//scacchiera.aggiungiPezzo(new Regina(regina));
+		colonneValide.add(colonna);
 			
 		posizionaRegine(scacchiera, riga+1);
 			
-		scacchiera.rimuoviPezzo(regina);
+		//scacchiera.rimuoviPezzo(regina);
+		colonneValide.remove(colonna);
 		
 	}
 	
