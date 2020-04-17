@@ -7,7 +7,7 @@ public class Model {
 
 	private Scacchiera scacchiera;
 	private List<Scacchiera> soluzioni;
-	private List<Integer> colonneValide;
+	private Regina regina;
 	
 	
 	public Model() {
@@ -23,35 +23,30 @@ public class Model {
 	public void posizionaRegine(Scacchiera scacchiera, int riga) {
 		
 		if (scacchiera.getScacchiera().size() == 8) {
-			soluzioni.add(new Scacchiera(scacchiera));
+			System.out.println(scacchiera);
 			return;
 		}
 		
-		
-		boolean trovata = false;
+		regina = new Regina(riga, 0);
 		
 		for (int c=0; c<8; c++) {
 			for (Regina r: scacchiera.getScacchiera()) {
-				if (c == r.getColonna() && c == r.getColonna()-1 && c == r.getColonna()+1) {
-					break;
+				if (c != r.getColonna() && c != r.getColonna()-1 && c != r.getColonna()+1) {
+					
+					regina.setColonna(c);
+					
+					scacchiera.aggiungiPezzo(new Regina(regina));
+					System.out.println(scacchiera);
+					
+					posizionaRegine(scacchiera, riga+1);
+					
+					scacchiera.rimuoviPezzo(regina);
+					
 				} else {
-					trovata = true;
+					break;
 				}
 			}
-			if (trovata) {
-				Regina regina = new Regina(riga, c);
-				
-			}
 		}
-		
-		//scacchiera.aggiungiPezzo(new Regina(regina));
-		colonneValide.add(colonna);
-			
-		posizionaRegine(scacchiera, riga+1);
-			
-		//scacchiera.rimuoviPezzo(regina);
-		colonneValide.remove(colonna);
-		
 	}
 	
 	

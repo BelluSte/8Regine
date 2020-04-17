@@ -6,7 +6,7 @@ public class provaModel {
 		
 		Model prova = new Model();
 		
-		System.out.println(prova.getSoluzioni());
+		//System.out.println(prova.getSoluzioni());
 	}
 
 }
