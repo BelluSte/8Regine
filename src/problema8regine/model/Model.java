@@ -33,11 +33,11 @@ public class Model {
 			
 			if (scacchiera.reginaValida(regina)) {
 					
-					scacchiera.aggiungiPezzo(new Regina(regina));
+				scacchiera.aggiungiPezzo(new Regina(regina));
 					
-					posizionaRegine(scacchiera, riga+1);
+				posizionaRegine(scacchiera, riga+1);
 					
-					scacchiera.rimuoviPezzo(regina);
+				scacchiera.rimuoviPezzo(regina);
 			}
 		}
 	}

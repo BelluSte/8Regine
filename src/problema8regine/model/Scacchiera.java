@@ -20,8 +20,8 @@ public class Scacchiera {
 	/**
 	 * genera una scacchiera copia
 	 */
-	public Scacchiera(Scacchiera scacchiera) {
-		this.scacchiera = new ArrayList<Regina>(scacchiera.getScacchiera());
+	public Scacchiera(Scacchiera s) {
+		this.scacchiera = new ArrayList<Regina>(s.getScacchiera());		//prova
 	}
 
 
@@ -46,17 +46,26 @@ public class Scacchiera {
 	
 	
 	public boolean reginaValida(Regina regina) {
-		for (Regina r : scacchiera) {
-			if (regina.getColonna() == r.getColonna() || regina.getColonna() == r.getColonna()-1 || regina.getColonna() == r.getColonna()+1) {
-				return false;
+		if (regina.getRiga() == 0) {
+			return true;
+		} else {
+			for (Regina r : scacchiera) {
+				int d = regina.getRiga() - r.getRiga();
+				if (regina.getColonna() == r.getColonna()) {
+					return false;
+				} else if (regina.getColonna() == r.getColonna()-d || regina.getColonna() == r.getColonna()+d) {
+					return false;
+				}
 			}
+			return true;
 		}
-		return true;
 	}
-	
+
+
 	@Override
 	public String toString() {
-		return scacchiera + "\n";
+		return scacchiera.toString();
 	}
+
 	
 }
