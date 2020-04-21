@@ -7,7 +7,8 @@ import java.util.List;
 public class Scacchiera {
 
 	private List<Regina> scacchiera = null;
-	
+	private static int num = 1;
+	private String nome;
 	
 	/**
 	 * genera una scacchiera (lista di pezzi) vuota
@@ -21,7 +22,9 @@ public class Scacchiera {
 	 * genera una scacchiera copia
 	 */
 	public Scacchiera(Scacchiera s) {
-		this.scacchiera = new ArrayList<Regina>(s.getScacchiera());		//prova
+		this.scacchiera = new ArrayList<Regina>(s.getScacchiera());
+		this.nome = "Soluzione " + num;
+		num++;
 	}
 
 
@@ -64,8 +67,8 @@ public class Scacchiera {
 
 	@Override
 	public String toString() {
-		return scacchiera.toString();
+		return nome;
 	}
 
-	
+
 }

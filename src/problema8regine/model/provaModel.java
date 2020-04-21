@@ -8,6 +8,9 @@ public class provaModel {
 		
 		for (Scacchiera s : prova.Risolvi()) {
 			System.out.println(s);
+			for (Regina r : s.getScacchiera()) {
+				System.out.print(r);
+			}
 		}
 		
 	}

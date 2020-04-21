@@ -1,6 +1,8 @@
 package problema8regine;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,11 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import problema8regine.model.Model;
+import problema8regine.model.Regina;
 import problema8regine.model.Scacchiera;
 
 public class P8RegineController {
 
     Model model;
+    private boolean view = false;
+    private boolean risolto = false;
+    private List<ImageView> caselle = null;
+    private List<Regina> listaSel = null;
 	
 	@FXML
     private ResourceBundle resources;
@@ -24,7 +31,7 @@ public class P8RegineController {
     private Button risolvi;
 
     @FXML
-    private ComboBox<Scacchiera> listaSoluzioni;
+    private ComboBox<Scacchiera> soluzioni;
 
     @FXML
     private ImageView C0_0;
@@ -221,18 +228,34 @@ public class P8RegineController {
     @FXML
     void risolviProblema(ActionEvent event) {
     	
-    	listaSoluzioni.getItems().addAll(model.Risolvi());
+    	if (!risolto) {
+    		soluzioni.getItems().addAll(model.Risolvi());
+    		risolto = true;
+    		soluzioni.setVisible(true);
+    	}
     }
 
     @FXML
     void visualizzaSoluzione(ActionEvent event) {
-
+    	if (view) {
+    		for (ImageView v : caselle) {
+    			if (v.isVisible()) {
+    				v.setVisible(false);
+    			}
+    		}
+    	}
+    	view = true;
+    	listaSel = new ArrayList<Regina>(soluzioni.getValue().getScacchiera());
+    	
+    	for (Regina r : listaSel) {
+    		selezionaCasella(r).setVisible(true);
+    	}
     }
 
     @FXML
     void initialize() {
         assert risolvi != null : "fx:id=\"risolvi\" was not injected: check your FXML file 'P8Regine.fxml'.";
-        assert listaSoluzioni != null : "fx:id=\"soluzioni\" was not injected: check your FXML file 'P8Regine.fxml'.";
+        assert soluzioni != null : "fx:id=\"soluzioni\" was not injected: check your FXML file 'P8Regine.fxml'.";
         assert C0_0 != null : "fx:id=\"C0_0\" was not injected: check your FXML file 'P8Regine.fxml'.";
         assert C0_1 != null : "fx:id=\"C0_1\" was not injected: check your FXML file 'P8Regine.fxml'.";
         assert C0_2 != null : "fx:id=\"C0_2\" was not injected: check your FXML file 'P8Regine.fxml'.";
@@ -298,9 +321,81 @@ public class P8RegineController {
         assert C7_6 != null : "fx:id=\"C7_6\" was not injected: check your FXML file 'P8Regine.fxml'.";
         assert C7_7 != null : "fx:id=\"C7_7\" was not injected: check your FXML file 'P8Regine.fxml'.";
 
+        caselle = new ArrayList<ImageView>();
+        caselle.add(C0_0);
+        caselle.add(C0_1);
+        caselle.add(C0_2);
+        caselle.add(C0_3);
+        caselle.add(C0_4);
+        caselle.add(C0_5);
+        caselle.add(C0_6);
+        caselle.add(C0_7);
+        caselle.add(C1_0);
+        caselle.add(C1_1);
+        caselle.add(C1_2);
+        caselle.add(C1_3);
+        caselle.add(C1_4);
+        caselle.add(C1_5);
+        caselle.add(C1_6);
+        caselle.add(C1_7);
+        caselle.add(C2_0);
+        caselle.add(C2_1);
+        caselle.add(C2_2);
+        caselle.add(C2_3);
+        caselle.add(C2_4);
+        caselle.add(C2_5);
+        caselle.add(C2_6);
+        caselle.add(C2_7);
+        caselle.add(C3_0);
+        caselle.add(C3_1);
+        caselle.add(C3_2);
+        caselle.add(C3_3);
+        caselle.add(C3_4);
+        caselle.add(C3_5);
+        caselle.add(C3_6);
+        caselle.add(C3_7);
+        caselle.add(C4_0);
+        caselle.add(C4_1);
+        caselle.add(C4_2);
+        caselle.add(C4_3);
+        caselle.add(C4_4);
+        caselle.add(C4_5);
+        caselle.add(C4_6);
+        caselle.add(C4_7);
+        caselle.add(C5_0);
+        caselle.add(C5_1);
+        caselle.add(C5_2);
+        caselle.add(C5_3);
+        caselle.add(C5_4);
+        caselle.add(C5_5);
+        caselle.add(C5_6);
+        caselle.add(C5_7);
+        caselle.add(C6_0);
+        caselle.add(C6_1);
+        caselle.add(C6_2);
+        caselle.add(C6_3);
+        caselle.add(C6_4);
+        caselle.add(C6_5);
+        caselle.add(C6_6);
+        caselle.add(C6_7);
+        caselle.add(C7_0);
+        caselle.add(C7_1);
+        caselle.add(C7_2);
+        caselle.add(C7_3);
+        caselle.add(C7_4);
+        caselle.add(C7_5);
+        caselle.add(C7_6);
+        caselle.add(C7_7);
+        
     }
     
     public void setModel(Model model) {
     	this.model = model;
+    }
+    
+    public ImageView selezionaCasella(Regina r) {
+    	int i = r.getColonna();
+    	int j = r.getRiga();
+    	return caselle.get(i*8+j);
     }
 }
