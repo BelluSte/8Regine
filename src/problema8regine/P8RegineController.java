@@ -1,7 +1,6 @@
 package problema8regine;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,14 +19,11 @@ public class P8RegineController {
     Model model;
     
     private boolean risolto = false;
-    private File img = new File("C:\\Users\\Stefano\\git\\8Regine\\src\\img\\regina.png");
+    private File img = new File("D:\\Stefano\\Documents\\Java\\Problema8Regine\\src\\img\\regina.png");
     private List<Regina> listaSel = null;
 	
 	@FXML
     private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button risolvi;
