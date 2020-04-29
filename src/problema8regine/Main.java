@@ -14,11 +14,9 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("P8Regine.fxml"));
 			BorderPane root = (BorderPane)loader.load();
-			
 			P8RegineController controller = loader.getController();
 			Model model = new Model();
 			controller.setModel(model);
-			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
